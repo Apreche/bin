@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+USER=$1
+
+QUERY="
+    CREATE DATABASE $1;
+    GRANT USAGE on *.* to $1@localhost identified by '$1';
+    GRANT ALL PRIVILEGES on $1.* to $1@localhost;
+"
+echo $QUERY | mysql -u root
