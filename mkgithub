@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# This will turn the current directory into a repo on Github
+
+# Set the username and password as environment variables like so, in bashrc:
+# export GITHUB_USER="User Name Goes Here"
+# export GITHUB_TOKEN="API Token Goes Here"
+
+CWD=`basename $PWD`
+
+curl -F "login=$GITHUB_USER" -F "token=$GITHUB_TOKEN" https://github.com/api/v2/yaml/repos/create -F "name=$CWD"
+
+REPO_URL="git@github.com:$GITHUB_USER/$CWD.git"
+
+if [ ! -d $PWD/.git ]; then
+    git init
+    touch README
+    git add README
+    git commit -m "first commit"
+fi
+
+git remote add origin $REPO_URL
+git push origin master
