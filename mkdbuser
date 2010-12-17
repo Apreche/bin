@@ -7,4 +7,4 @@ QUERY="
     GRANT USAGE on *.* to $1@localhost identified by '$1';
     GRANT ALL PRIVILEGES on $1.* to $1@localhost;
 "
-echo $QUERY | mysql -u root
+echo $QUERY
